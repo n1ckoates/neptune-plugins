@@ -20,7 +20,7 @@ var yp=Object.create;var Un=Object.defineProperty;var gp=Object.getOwnPropertyDe
 		onClick=${()=>{ye.backgroundGradient=!ye.backgroundGradient,lt()}}
 		title="Background gradient"
 	/>`;var Nn,Bn,$n=[],x1=e=>"https://resources.tidal.com/images/"+e.split("-").join("/")+"/640x640.jpg?cors";async function hp(){let{playbackContext:e}=Tr();if(Nn===e?.actualProductId)return;Nn=e?.actualProductId;let r=await Ar.ensure(e?.actualProductId);if(!r||!r.album?.cover||Bn===r.album.cover)return;Bn=r.album.cover;let t=x1(r.album.cover),n=await pp.default.from(t).getPalette();for(let[i,a]of Object.entries(n)){let o=`--cover-${i}`;if(!a){document.documentElement.style.setProperty(o,null);continue}$n.includes(o)||$n.push(o),document.documentElement.style.setProperty(o,a.rgb.join(", "))}}var S1=b1("playbackControls/TIME_UPDATE",([e])=>{e===0&&hp()});function lt(){if(ye.transparentTheme?Ln(`
-		#wimp, main, .sidebarWrapper, [class^="mainContainer"] {
+		#wimp, main, .sidebarWrapper, [class^="mainContainer"], [class^="tabListWrapper"] {
 			background: unset !important;
 		}
 					
@@ -31,6 +31,10 @@ var yp=Object.create;var Un=Object.defineProperty;var gp=Object.getOwnPropertyDe
 		#nowPlaying > [class^="innerContainer"] {
 			height: calc(100vh - 126px);
 			overflow: hidden;
+		}
+			
+		.tidal-ui__z-stack > :not(:has(div)) {
+			background-image: linear-gradient(90deg, rgb(var(--cover-DarkVibrant), 0.5), rgb(var(--cover-LightVibrant), 0.5)) !important;
 		}`,"transparentTheme"):ft("transparentTheme")?.remove(),ye.backgroundGradient){let r=Object.entries({"top left":"DarkVibrant","center left":"Vibrant","bottom left":"LightMuted","top right":"LightVibrant","center right":"Muted","bottom right":"DarkMuted"}).map(([t,n])=>`radial-gradient(ellipse at ${t}, rgb(var(--cover-${n}), 0.5), transparent 70%)`).join(", ");Ln(`body{background-image:${r};}`,"backgroundGradient")}else ft("backgroundGradient")?.remove()}lt();hp();var UP=()=>{S1(),ft("coverTheme")?.remove(),$n.forEach(e=>document.documentElement.style.removeProperty(e)),Nn=void 0,Bn=void 0};export{m1 as Settings,UP as onUnload,lt as updateCSS};
 /*! Bundled license information:
 
