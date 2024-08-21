@@ -20,7 +20,7 @@ var dp=Object.create;var Un=Object.defineProperty;var mp=Object.getOwnPropertyDe
 		onClick=${()=>{ye.backgroundGradient=!ye.backgroundGradient,lt()}}
 		title="Background gradient"
 	/>`;var Nn,Bn,$n=[],w1=e=>"https://resources.tidal.com/images/"+e.split("-").join("/")+"/640x640.jpg?cors";async function gp(e){if(Nn===e)return;Nn=e;let r=await Ar.ensure(e);if(!r||!r.album?.cover||Bn===r.album.cover)return;Bn=r.album.cover;let t=w1(r.album.cover),n=await yp.default.from(t).getPalette();for(let[i,a]of Object.entries(n)){let o=`--cover-${i}`;if(!a){document.documentElement.style.setProperty(o,null);continue}$n.includes(o)||$n.push(o),document.documentElement.style.setProperty(o,a.rgb.join(", "))}}function vp([e]){let r=e.mediaProduct?.productId;r&&gp(r)}var _1=hp("playbackControls/PREFILL_MEDIA_PRODUCT_TRANSITION",vp),q1=hp("playbackControls/MEDIA_PRODUCT_TRANSITION",vp);function lt(){if(ye.transparentTheme?Ln(`
-		#wimp, main, .sidebarWrapper, [class^="mainContainer"], [class^="tabListWrapper"] {
+		#wimp, main, [class^="sidebarWrapper"], [class^="mainContainer"], [class^="tabListWrapper"] {
 			background: unset !important;
 		}
 					
